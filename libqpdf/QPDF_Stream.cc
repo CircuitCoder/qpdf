@@ -16,6 +16,7 @@
 #include <qpdf/SF_RunLengthDecode.hh>
 #include <qpdf/SF_ASCII85Decode.hh>
 #include <qpdf/SF_ASCIIHexDecode.hh>
+#include <qpdf/SF_JDDRMDecode.hh>
 
 #include <stdexcept>
 
@@ -75,6 +76,7 @@ std::map<
     std::string,
     std::function<std::shared_ptr<QPDFStreamFilter>()>>
 QPDF_Stream::filter_factories = {
+    {"/JDPDFENCRYPTBY360BUY", SF_JDDRMDecode::factory},
     {"/Crypt", []() { return std::make_shared<SF_Crypt>(); }},
     {"/FlateDecode", SF_FlateLzwDecode::flate_factory},
     {"/LZWDecode", SF_FlateLzwDecode::lzw_factory},
